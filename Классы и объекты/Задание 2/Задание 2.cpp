@@ -45,7 +45,7 @@ int main()
 
 
     std::string checkInitialInitValue;
-    int initialInitValue = 0;
+    int initialInitValue = 1;
     bool checkTrueInitialInitValue = false;
 
 
@@ -71,7 +71,7 @@ int main()
         }
     } while (!checkTrueInitialInitValue);
 
-    Counter Counter(initialInitValue);
+    Counter userCounter(initialInitValue);
 
     std::cout << std::endl;
 
@@ -91,15 +91,15 @@ int main()
         }
         else if (commandValue == "+")
         {
-            Counter.counterPlus();
+            userCounter.counterPlus();
         }
         else if (commandValue == "-")
         {
-            Counter.counterMinus();
+            userCounter.counterMinus();
         }
         else if (commandValue == "=")
         {
-            std::cout << "Значение счетчика: " << Counter.getCounter() << "." << std::endl;
+            std::cout << "Значение счетчика: " << userCounter.getCounter() << "." << std::endl;
         }
         else
         {

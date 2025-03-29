@@ -14,32 +14,32 @@ public:
     double add()
     {
         return num1 + num2;
-    };
+    }
 
     double multiply()
     {
         return num1 * num2;
-    };
+    }
 
     double subtract_1_2()
     {
         return num1 - num2;
-    };
+    }
 
     double subtract_2_1()
     {
         return num2 - num1;
-    };
+    }
 
     double divide_1_2()
     {
         return num1 / num2;
-    };
+    }
 
     double divide_2_1()
     {
         return num2 / num1;
-    };
+    }
 
     bool set_num1(double num_1)
     {
