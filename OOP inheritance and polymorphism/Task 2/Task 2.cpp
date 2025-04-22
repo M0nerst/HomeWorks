@@ -16,8 +16,9 @@ protected:
 	int angleD_ = 0;
 
 public:
-	std::string getNameOfFigure() { return nameOfFigure_; }
-	int getHaveFourSides() { return haveFourSides_; }
+	Figure() = default;   //про это имелось в виду?
+	std::string getNameOfFigure() const { return nameOfFigure_; }
+	bool getHaveFourSides() const { return haveFourSides_; }
 
 	int getSideLengthA() { return sideLengthA_; }
 	int getSideLengthB() { return sideLengthB_; }
@@ -47,30 +48,30 @@ public:
 	}
 };
 
-class rightTriangle : public Triangle
+class RightTriangle : public Triangle     //с маленькой было, потому что, Triangle основной класс, а right просто сторона, т.е. побочный.
 {
 public:
-	rightTriangle(int sideLengthA, int sideLengthB, int sideLengthC, int angleA, int angleB)
+	RightTriangle(int sideLengthA, int sideLengthB, int sideLengthC, int angleA, int angleB)
 		: Triangle(sideLengthA, sideLengthB, sideLengthC, angleA, angleB, 90)
 	{
 		Triangle::nameOfFigure_ = "Прямоугольный треугольник";
 	};
 };
 
-class isoscelesTriangle : public Triangle
+class IsoscelesTriangle : public Triangle
 {
 public:
-	isoscelesTriangle(int sideLengthA, int sideLengthB, int angleA, int angleB)
+	IsoscelesTriangle(int sideLengthA, int sideLengthB, int angleA, int angleB)
 		: Triangle(sideLengthA, sideLengthB, sideLengthA, angleA, angleB, angleA)
 	{
 		Triangle::nameOfFigure_ = "Равнобедренный треугольник";
 	};
 };
 
-class equilateralTriangle : public Triangle
+class EquilateralTriangle : public Triangle
 {
 public:
-	equilateralTriangle(int sideLengthA)
+	EquilateralTriangle(int sideLengthA)
 		: Triangle(sideLengthA, sideLengthA, sideLengthA, 60, 60, 60)
 	{
 		Triangle::nameOfFigure_ = "Равносторонний треугольник";
@@ -139,7 +140,7 @@ public:
 	}
 };
 
-void printFigure(Figure& figure)
+void print_info(Figure& figure)
 {
 	std::cout << std::endl;
 	std::cout << figure.getNameOfFigure() << ":" << std::endl;
@@ -164,30 +165,30 @@ int main()
 	system("chcp 1251");
 	system("cls");
 
-	Triangle Triangle1(10, 20, 30, 40, 50, 60);
-	printFigure(Triangle1);
+	Triangle Triangle1(10, 25, 33, 42, 57, 61);
+	print_info(Triangle1);
 
-	rightTriangle rightTriangle1(10, 20, 30, 40, 50);
-	printFigure(rightTriangle1);
+	RightTriangle rightTriangle1(10, 20, 30, 40, 50);
+	print_info(rightTriangle1);
 
-	isoscelesTriangle isoscelesTriangle1(11, 220, 330, 440);
-	printFigure(isoscelesTriangle1);
+	IsoscelesTriangle isoscelesTriangle1(11, 220, 330, 440);
+	print_info(isoscelesTriangle1);
 
-	equilateralTriangle equilateralTriangle1(111);
-	printFigure(equilateralTriangle1);
+	EquilateralTriangle equilateralTriangle1(111);
+	print_info(equilateralTriangle1);
 
 	Quadrilateral Quadrilateral1(10, 20, 30, 40, 50, 60, 70, 80);
-	printFigure(Quadrilateral1);
+	print_info(Quadrilateral1);
 
 	Rectangle Rectangle1(14, 24);
-	printFigure(Rectangle1);
+	print_info(Rectangle1);
 
 	Square Square1(333);
-	printFigure(Square1);
+	print_info(Square1);
 
 	Parallelogram Parallelogram1(555, 666, 777, 888);
-	printFigure(Parallelogram1);
+	print_info(Parallelogram1);
 
 	Rhomb Rhomb1(11, 67, 33);
-	printFigure(Rhomb1);
+	print_info(Rhomb1);
 }
