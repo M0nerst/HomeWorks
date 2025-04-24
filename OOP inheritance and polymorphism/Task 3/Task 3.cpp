@@ -169,9 +169,9 @@ class EquilateralTriangle : public Triangle
 private:
 	bool CheckEquilateralTriangle()
 	{
-		if ((sideLengthA_ == sideLengthB_ && sideLengthB_ == sideLengthC_) && ((angleA_ == 60) && (angleA_ = 60) && (angleC_ = 60)))
+		if ((sideLengthA_ == sideLengthB_ && sideLengthB_ == sideLengthC_) && (angleA_ == 60 && angleB_ == 60 && angleC_ == 60))
 		{
-			return (sideLengthA_ == sideLengthB_ && sideLengthB_ == sideLengthC_) && (angleA_ == 60 && angleB_ == 60 && angleC_ == 60);
+			return true;
 		}
 		else
 		{
