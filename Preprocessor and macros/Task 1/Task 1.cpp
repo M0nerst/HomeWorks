@@ -2,17 +2,6 @@
 #include <iostream>
 
 
-
-void add(double &FirstNumber, double &SecondNumber) {
-        std::cout << "Введите число 1: "; std::cin >> FirstNumber;
-     
-        std::cout << std::endl;
-        std::cout << "Введите число 2: "; std::cin >> SecondNumber;
-        
-        std::cout << std::endl;
-        std::cout << "Результат сложения:" << FirstNumber + SecondNumber;
-}
-
 #define MODE 1
 #if !defined MODE
 #error The MODE must be defined
@@ -33,7 +22,17 @@ int main()
         std::cout << "Работаю в боевом режиме" << std::endl;
         double FirstNumber = 0;
         double SecondNumber = 0;
-        add(FirstNumber, SecondNumber);
+        double add();
+        {
+            std::cout << "Введите число 1: "; std::cin >> FirstNumber;
+
+            std::cout << std::endl;
+            std::cout << "Введите число 2: "; std::cin >> SecondNumber;
+
+            std::cout << std::endl;
+            std::cout << "Результат сложения:" << FirstNumber + SecondNumber;
+        }
+     
 
     #else
         std::cout << "Неизвестный режим. Завершение работы" << std::endl;
@@ -45,5 +44,5 @@ int main()
 
 
 
- 
+        return 0;
 }
