@@ -7,6 +7,20 @@
 #error The MODE must be defined
 #endif
 
+#if MODE == 1
+void add(double FirstNumber,double SecondNumber)
+{
+    std::cout << "Введите число 1: "; std::cin >> FirstNumber;
+
+    std::cout << std::endl;
+    std::cout << "Введите число 2: "; std::cin >> SecondNumber;
+
+    std::cout << std::endl;
+    std::cout << "Результат сложения:" << FirstNumber + SecondNumber;
+}
+#endif
+
+
 int main()
 {
     setlocale(LC_ALL, "Russian"); 
@@ -22,17 +36,7 @@ int main()
         std::cout << "Работаю в боевом режиме" << std::endl;
         double FirstNumber = 0;
         double SecondNumber = 0;
-        double add();
-        {
-            std::cout << "Введите число 1: "; std::cin >> FirstNumber;
-
-            std::cout << std::endl;
-            std::cout << "Введите число 2: "; std::cin >> SecondNumber;
-
-            std::cout << std::endl;
-            std::cout << "Результат сложения:" << FirstNumber + SecondNumber;
-        }
-     
+        add(FirstNumber, SecondNumber);
 
     #else
         std::cout << "Неизвестный режим. Завершение работы" << std::endl;
