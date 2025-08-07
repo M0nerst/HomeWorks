@@ -11,13 +11,13 @@ private:
 	int sizeOfArray_ = 0;
 
 public:
-	SmartArray(const int sizeOfArray);
+	SmartArray(int sizeOfArray);
 	~SmartArray();
 
 	void smartArrayPrint();
 	void smartArrayPushBack(const int addingElement);
 	int smartArrayGetElement(const int gettingElementByIndex);
 
-	SmartArray(const SmartArray& other);
+	SmartArray(SmartArray& other);
 	SmartArray& operator=(const SmartArray& other);
 };

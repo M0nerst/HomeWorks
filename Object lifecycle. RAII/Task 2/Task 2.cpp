@@ -8,7 +8,7 @@ int main()
     setlocale(LC_ALL, "Russian");
 
     SmartArray sArr1(5);
-    sArr1.smartArrayPushBack(1);
+    sArr1.smartArrayPushBack(3);
     sArr1.smartArrayPushBack(11);
     sArr1.smartArrayPushBack(111);
     sArr1.smartArrayPushBack(1111);
@@ -23,7 +23,8 @@ int main()
     sArr2.smartArrayPushBack(2222);
     sArr2.smartArrayPushBack(222);
     sArr2.smartArrayPushBack(22);
-    sArr2.smartArrayPushBack(2);
+    sArr2.smartArrayPushBack(6);
+  
 
     sArr2.smartArrayPrint();
 
@@ -31,8 +32,8 @@ int main()
     SmartArray sArr3(sArr1);
     sArr3.smartArrayPrint();
 
-
     SmartArray sArr4 = sArr2;
+    //sArr2.smartArrayPushBack(18);
     sArr4.smartArrayPrint();
 
     //std::cout << "**************В 1 массиве должны быть 1*********************" << std::endl;
@@ -41,6 +42,7 @@ int main()
 
     std::cout << std::endl;
     sArr4 = sArr3;
+ 
     sArr4.smartArrayPrint();
     std::cout << std::endl;
 

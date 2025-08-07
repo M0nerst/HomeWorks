@@ -1,6 +1,6 @@
 ﻿#include "FileName.h"
 
-SmartArray::SmartArray(const int sizeOfArray)
+SmartArray::SmartArray(int sizeOfArray)
 {
 	sizeOfArray_ = sizeOfArray;
 
@@ -30,7 +30,7 @@ void SmartArray::smartArrayPrint()
 	std::cout << std::endl;
 };
 
-void SmartArray::smartArrayPushBack(const int addingElement)
+void SmartArray::smartArrayPushBack(int addingElement)
 {
 	if (countForPushBack_ >= sizeOfArray_)
 	{
@@ -54,21 +54,42 @@ int SmartArray::smartArrayGetElement(const int gettingElementByIndex)
 		return smArray_[gettingElementByIndex];
 	}
 }
-SmartArray::SmartArray(const SmartArray& other)
+SmartArray::SmartArray(SmartArray& other)
 {
+
 	this->sizeOfArray_ = other.sizeOfArray_;
 
 	//создаем новый массив2 длинной как массив1(other) с которого копируем.
 	smArray_ = new int[other.sizeOfArray_];
 
+
 	//копируем элементы из массив1(other) в массив2
 	for (int i = 0; i < other.sizeOfArray_; i++)
 	{
 		this->smArray_[i] = other.smArray_[i];
+		/*SmartArray&smartArrayPushBack();*/
 	}
+
+	/*for (int i = 0; i < countForPushBack_; i++)
+	{
+		this->smArray_[i] = other.smArray_[i];
+
+	}*/
+	
+
 	std::cout << std::endl;
 
 	std::cout << this << " - Конструктор Копирования SmartArray(const SmartArray& other)\n\n";
+
+	//if (countForPushBack_ >= sizeOfArray_)
+	//{
+	//	throw std::out_of_range("PushBack - Out_of_range");
+	//}
+	//else
+	//{
+	//	smArray_[countForPushBack_] = sizeOfArray_;
+	//	++countForPushBack_;
+	//}
 };
 
 SmartArray& SmartArray::operator=(const SmartArray& other)
