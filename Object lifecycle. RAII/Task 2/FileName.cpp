@@ -59,37 +59,23 @@ SmartArray::SmartArray(SmartArray& other)
 
 	this->sizeOfArray_ = other.sizeOfArray_;
 
+	//копируем countForPushBack_ из исходного объекта
+	this->countForPushBack_ = other.countForPushBack_;
+
 	//создаем новый массив2 длинной как массив1(other) с которого копируем.
 	smArray_ = new int[other.sizeOfArray_];
 
-
 	//копируем элементы из массив1(other) в массив2
-	for (int i = 0; i < other.sizeOfArray_; i++)
+	for (int i = 0; i < other.countForPushBack_; i++)
 	{
 		this->smArray_[i] = other.smArray_[i];
-		/*SmartArray&smartArrayPushBack();*/
 	}
-
-	/*for (int i = 0; i < countForPushBack_; i++)
-	{
-		this->smArray_[i] = other.smArray_[i];
-
-	}*/
-	
 
 	std::cout << std::endl;
 
 	std::cout << this << " - Конструктор Копирования SmartArray(const SmartArray& other)\n\n";
 
-	//if (countForPushBack_ >= sizeOfArray_)
-	//{
-	//	throw std::out_of_range("PushBack - Out_of_range");
-	//}
-	//else
-	//{
-	//	smArray_[countForPushBack_] = sizeOfArray_;
-	//	++countForPushBack_;
-	//}
+
 };
 
 SmartArray& SmartArray::operator=(const SmartArray& other)
@@ -98,13 +84,16 @@ SmartArray& SmartArray::operator=(const SmartArray& other)
 	{
 		this->sizeOfArray_ = other.sizeOfArray_;
 
+		//копируем countForPushBack_ из исходного объекта
+		this->countForPushBack_ = other.countForPushBack_;
+
 		delete[] smArray_;
 
 		//создаем новый массив sArr3 длинной как массив с которого копируем sArr2.
 		smArray_ = new int[other.sizeOfArray_];
 
 		//копируем элементы из sArr2 в sArr3
-		for (int i = 0; i < other.sizeOfArray_; i++)
+		for (int i = 0; i < other.countForPushBack_; i++)
 		{
 			this->smArray_[i] = other.smArray_[i];
 		}

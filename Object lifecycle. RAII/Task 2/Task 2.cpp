@@ -25,7 +25,6 @@ int main()
     sArr2.smartArrayPushBack(22);
     sArr2.smartArrayPushBack(6);
   
-
     sArr2.smartArrayPrint();
 
 
@@ -33,7 +32,7 @@ int main()
     sArr3.smartArrayPrint();
 
     SmartArray sArr4 = sArr2;
-    //sArr2.smartArrayPushBack(18);
+    //sArr4.smartArrayPushBack(2222);
     sArr4.smartArrayPrint();
 
     //std::cout << "**************В 1 массиве должны быть 1*********************" << std::endl;
