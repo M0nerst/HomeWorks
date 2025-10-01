@@ -1,44 +1,42 @@
-﻿/*
- * Программа для измерения производительности параллельного сложения векторов
- *
- * Цель: Сравнить время выполнения операции поэлементного сложения двух векторов
- * с использованием различного количества потоков и размеров векторов.
- */
+﻿
+
+
+//Теперь каждый поток обрабатывает свою часть векторов напрямую
+
+
 
 #include <iostream>      
-#include <thread>        
+#include <thread>       
 #include <vector>       
-#include <chrono>       
-#include <atomic>       
+#include <chrono>        
+#include <functional>    // Для std::cref и std::ref
 
- 
-void sum_vec(std::vector<int> Vector1, std::vector<int> Vector2) {
-    // Проходим по всем элементам векторов и складываем соответствующие элементы
-    for (int i = 0; i < Vector1.size(); i++) {
-        int sum = Vector1[i] + Vector2[i];
+
+void sum_vec(const std::vector<int>& Vector1, const std::vector<int>& Vector2,
+    std::vector<int>& result, int start, int end) {
+    
+    for (int i = start; i < end; i++) {
+        result[i] = Vector1[i] + Vector2[i];
     }
 }
 
-
 int main()
 {
-   
-    setlocale(LC_ALL, "ru");
+       setlocale(LC_ALL, "ru");
 
-    // Выводим количество доступных аппаратных ядер процессора
-    std::cout << "Количество аппаратных ядер - " << std::thread::hardware_concurrency() << std::endl;
+        std::cout << "Количество аппаратных ядер - " << std::thread::hardware_concurrency() << std::endl;
 
-    // Выводим заголовок таблицы результатов с размерами векторов
-    std::cout << "\t\t1'000" << "\t        10'000" << "\t       100'000" << "\t     1'000'000" << "\n";
+        std::cout << "\t\t1'000" << "\t        10'000" << "\t       100'000" << "\t     1'000'000" << "\n";
     std::cout << "-------------------------------------------------------------------------" << std::endl;
 
-  
-    std::vector<int> Threads{ 1, 2, 4, 8, 16 };                    // Количество потоков для тестирования
-    std::vector<int> Size_v{ 1'000, 10'000, 100'000, 1'000'000 }; // Размеры векторов для тестирования
+    // Определяем конфигурации для тестирования
+    std::vector<int> Threads{ 1, 2, 4, 8, 16 };                   
+    std::vector<int> Size_v{ 1'000, 10'000, 100'000, 1'000'000 }; 
 
-    
-    std::vector<int> v1;  // Первый вектор
-    std::vector<int> v2;  // Второй вектор
+    // Объявляем основные векторы для вычислений
+    std::vector<int> v1;    
+    std::vector<int> v2;     
+    std::vector<int> result; // Вектор для хранения результата сложения
 
     // Внешний цикл: перебираем различное количество потоков
     for (auto& c_Thread : Threads) {
@@ -49,8 +47,9 @@ int main()
         for (auto& c_Vector : Size_v) {
 
             // Подготавливаем векторы нужного размера
-            v1.resize(c_Vector, 2);  // Заполняем первый вектор значениями 2
-            v2.resize(c_Vector, 1);  // Заполняем второй вектор значениями 1
+            v1.resize(c_Vector, 2);     
+            v2.resize(c_Vector, 1);     
+            result.resize(c_Vector, 0); 
 
             // Вычисляем размер части вектора для каждого потока
             int size_Threads = static_cast<int> (c_Vector / c_Thread);
@@ -63,29 +62,23 @@ int main()
 
             // Создаем и запускаем потоки
             for (int i = 0; i < c_Thread; i++) {
-                // Создаем локальные векторы для текущего потока
-                std::vector<int>n_v1;
-                std::vector<int>n_v2;
-                int r_bord = 0;  // Правая граница диапазона для текущего потока
+                // Вычисляем границы диапазона для текущего потока
+                int start_idx = size_Threads * i;  // Начальный индекс
+                int end_idx;                       // Конечный индекс
 
-                // Определяем границы обработки для текущего потока
+                // Определяем конечный индекс для текущего потока
                 if (i != c_Thread - 1) {
                     // Для всех потоков кроме последнего
-                    r_bord = size_Threads * (i + 1);
+                    end_idx = size_Threads * (i + 1);
                 }
                 else {
                     // Для последнего потока (обрабатываем оставшиеся элементы)
-                    r_bord = c_Vector;
+                    end_idx = c_Vector;
                 }
 
-                // Копируем соответствующую часть данных в локальные векторы
-                for (int j = size_Threads * i; j < r_bord; j++) {
-                    n_v1.push_back(v1[j]);
-                    n_v2.push_back(v2[j]);
-                }
-
-                // Создаем и запускаем поток с функцией sum_vec
-                th.push_back(std::thread(sum_vec, n_v1, n_v2));
+                // Создаем и запускаем поток с функцией sum_vec, передавая диапазон
+                th.push_back(std::thread(sum_vec, std::cref(v1), std::cref(v2),
+                    std::ref(result), start_idx, end_idx));
             }
 
             // Ожидаем завершения всех потоков
@@ -98,7 +91,7 @@ int main()
 
             // Вычисляем и выводим время выполнения в миллисекундах
             std::chrono::duration<double, std::milli> time = stop - start;
-            std::cout.width(5);  // Устанавливаем ширину поля для форматирования
+            std::cout.width(5);
             std::cout << "\t" << time.count() << "ms";
         }
         std::cout << std::endl;  // Переходим на новую строку после обработки всех размеров
