@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
-RUN apt update && apt install -y g++ mc
+RUN apt update && apt install -y g++ nano
 WORKDIR  /app
 COPY main.cpp .
-RUN g++ main.cpp -o hello_world
-CMD [ "./hello_world"]
+RUN g++ main.cpp -o hi
+CMD [ "./hi"]

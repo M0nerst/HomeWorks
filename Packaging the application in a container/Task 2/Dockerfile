@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
-RUN apt update && apt install -y g++
+RUN apt update && apt install -y g++ clang nano
 WORKDIR  /app
-COPY . .
-RUN g++ main.cpp -o macros
-CMD ["./macros"]
+COPY Task2.cpp .
+RUN g++ Task2.cpp -o test
+CMD ["./test"]
