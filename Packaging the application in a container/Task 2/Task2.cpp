@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
 	cin >> a;
 	cout << "Введите второе число: ";
 	cin >> b;
+
 	cout << "Результат сложения: " << add(a, b) << endl;
 #else
 	cout << "Неизвестный режим. Завершение работы\n";

@@ -11,7 +11,7 @@ public:
     {
         columns_.push_back(column);
         return *this;
-    }
+        }
 
    
     SqlSelectQueryBuilder& AddFrom(const std::string& table) 
